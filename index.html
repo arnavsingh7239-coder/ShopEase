@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopEase | Online Shopping</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="loginPage" class="auth-page">
+    <div class="auth-visual">
+      <div class="brand"><span class="brand-icon">🛒</span> ShopEase</div>
+      <div class="visual-copy">
+        <p class="eyebrow">YOUR EVERYDAY SHOPPING DESTINATION</p>
+        <h1>Shop Smart.<br><span>Live Better.</span></h1>
+        <p>Discover amazing products at incredible prices.</p>
+        <div class="visual-icons"><span>📱</span><span>💻</span><span>🎧</span><span>👟</span></div>
+        <div class="visual-note">Everything you love, all in one place.</div>
+      </div>
+      <div class="visual-bottom">A student e-commerce project built with HTML, CSS & JavaScript.</div>
+    </div>
+    <div class="auth-side">
+      <div class="auth-card">
+        <div class="mobile-brand brand"><span class="brand-icon">🛒</span> ShopEase</div>
+        <p class="eyebrow blue">WELCOME TO SHOPEASE</p>
+        <h2 id="formTitle">Welcome Back!</h2>
+        <p id="formSubtitle" class="muted">Login to continue shopping.</p>
+        <div class="role-selector">
+          <button type="button" class="role-btn active" id="customerRole" onclick="selectRole('customer')">👤 Customer</button>
+          <button type="button" class="role-btn" id="sellerRole" onclick="selectRole('seller')">🏪 Seller</button>
+        </div>
+        <form id="loginForm">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="Enter your email" autocomplete="email" required>
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter your password" minlength="6" autocomplete="current-password" required>
+          <div class="password-row">
+            <label class="check-label"><input type="checkbox" id="showPassword" onchange="togglePassword()"> <span>Show password</span></label>
+            <button type="button" class="link-button" onclick="forgotPassword()">Forgot password?</button>
+          </div>
+          <button type="submit" class="primary-button full-width">Login <span>→</span></button>
+        </form>
+        <div class="separator"><span>OR</span></div>
+        <button type="button" class="outline-button full-width" onclick="showSignup()">Create New Account</button>
+        <p id="loginMessage" class="message" aria-live="polite"></p>
+        <p class="demo-note">College Project Demo · No real payments</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="signupPage" class="auth-page hidden">
+    <div class="auth-visual">
+      <div class="brand"><span class="brand-icon">🛒</span> ShopEase</div>
+      <div class="visual-copy">
+        <p class="eyebrow">JOIN THE COMMUNITY</p>
+        <h1>Shopping made<br><span>simple.</span></h1>
+        <p>Create an account to explore products, manage your cart and place demo orders.</p>
+        <div class="visual-icons"><span>📦</span><span>🛍️</span><span>✨</span></div>
+      </div>
+      <div class="visual-bottom">A student e-commerce project built with HTML, CSS & JavaScript.</div>
+    </div>
+    <div class="auth-side">
+      <div class="auth-card">
+        <div class="mobile-brand brand"><span class="brand-icon">🛒</span> ShopEase</div>
+        <button class="back-button" type="button" onclick="showLogin()">← Back to Login</button>
+        <p class="eyebrow blue">GET STARTED</p>
+        <h2>Create Account</h2>
+        <p class="muted">Join ShopEase in a few simple steps.</p>
+        <form id="signupForm">
+          <label for="signupName">Full Name</label>
+          <input id="signupName" required maxlength="80" placeholder="Enter your full name" autocomplete="name">
+          <label for="signupEmail">Email Address</label>
+          <input id="signupEmail" type="email" required placeholder="Enter your email" autocomplete="email">
+          <label for="signupPassword">Password</label>
+          <input id="signupPassword" type="password" minlength="6" required placeholder="At least 6 characters" autocomplete="new-password">
+          <label for="signupRole">Account Type</label>
+          <select id="signupRole"><option value="customer">Customer</option><option value="seller">Seller</option></select>
+          <button type="submit" class="primary-button full-width">Create Account →</button>
+        </form>
+        <p id="signupMessage" class="message" aria-live="polite"></p>
+        <p class="demo-note">Demo only: account data is saved in this browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="shopPage" class="hidden">
+    <header class="topbar">
+      <a href="#" class="brand header-brand" onclick="setCategory('All');return false;"><span class="brand-icon">🛒</span> ShopEase</a>
+      <div class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search products..." aria-label="Search products"><button type="button" onclick="searchProducts()">Search</button></div>
+      <div class="header-actions">
+        <span id="welcomeMessage" class="welcome-message"></span>
+        <button type="button" onclick="showAccount()">Account</button>
+        <button type="button" onclick="showWishlist()">♡ Wishlist</button>
+        <button type="button" onclick="showCart()">🛒 Cart <span id="cartCount" class="count-badge">0</span></button>
+        <button type="button" onclick="showOrders()">Orders</button>
+        <button type="button" class="logout-button" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <nav class="navigation">
+      <button type="button" class="nav-item active" onclick="setCategory('All',this)">Home</button>
+      <button type="button" class="nav-item" onclick="setCategory('Electronics',this)">Electronics</button>
+      <button type="button" class="nav-item" onclick="setCategory('Fashion',this)">Fashion</button>
+      <button type="button" class="nav-item" onclick="setCategory('Home',this)">Home & Kitchen</button>
+      <button type="button" class="nav-item" onclick="setCategory('Beauty',this)">Beauty</button>
+      <button type="button" class="nav-item" onclick="setCategory('Books',this)">Books</button>
+      <button type="button" id="sellerNav" class="nav-item hidden" onclick="showSellerPanel()">Seller Dashboard</button>
+    </nav>
+
+    <main class="main-content">
+      <section class="hero">
+        <div class="hero-copy"><span class="sale-label">MEGA SALE · SPECIAL OFFERS</span><h1>Big Deals.<br><span>Better Living.</span></h1><p>Find your favourite products at amazing prices.</p><button type="button" class="primary-button" onclick="setCategory('All')">Shop Now →</button><small>Easy browsing · Demo checkout · Cash on delivery simulation</small></div>
+        <div class="hero-art" aria-hidden="true"><div class="art-circle">🛍️</div><span class="float-icon icon-one">🎧</span><span class="float-icon icon-two">⌚</span><span class="float-icon icon-three">📱</span><span class="float-icon icon-four">👟</span></div>
+      </section>
+
+      <section class="categories-section">
+        <div class="section-title"><div><p class="eyebrow blue">EXPLORE</p><h2>Shop by Category</h2></div></div>
+        <div class="category-grid">
+          <button type="button" onclick="setCategory('Electronics')"><span>📱</span>Electronics</button>
+          <button type="button" onclick="setCategory('Fashion')"><span>👕</span>Fashion</button>
+          <button type="button" onclick="setCategory('Home')"><span>🛋️</span>Home & Kitchen</button>
+          <button type="button" onclick="setCategory('Beauty')"><span>💄</span>Beauty</button>
+          <button type="button" onclick="setCategory('Books')"><span>📚</span>Books</button>
+        </div>
+      </section>
+
+      <section id="sellerPanel" class="seller-panel hidden">
+        <div class="section-title"><div><p class="eyebrow blue">SELLER CENTRE</p><h2>🏪 Seller Dashboard</h2><p class="muted">Add products and manage listings from this browser.</p></div></div>
+        <form id="productForm" class="product-form">
+          <div class="field"><label for="productName">Product Name</label><input id="productName" required maxlength="100" placeholder="e.g. Wireless Headphones"></div>
+          <div class="field"><label for="productPrice">Price (₹)</label><input id="productPrice" type="number" min="1" max="10000000" step="1" required placeholder="e.g. 799"></div>
+          <div class="field"><label for="productCategory">Category</label><select id="productCategory"><option value="Electronics">Electronics</option><option value="Fashion">Fashion</option><option value="Home">Home & Kitchen</option><option value="Beauty">Beauty</option><option value="Books">Books</option></select></div>
+          <div class="field"><label for="productDescription">Description</label><input id="productDescription" maxlength="300" placeholder="Short product description"></div>
+          <div class="field photo-field"><label for="productImage">Product Photo (max 700 KB)</label><input id="productImage" type="file" accept="image/*" required><img id="imagePreview" class="image-preview hidden" alt="Selected product preview"></div>
+          <button type="submit" class="primary-button">＋ Add Product</button>
+        </form>
+        <p id="sellerMessage" class="message" aria-live="polite"></p>
+        <h3 class="subheading">My Products</h3><div id="sellerProductsList" class="seller-products-grid"></div>
+      </section>
+
+      <section id="productSection" class="products-section">
+        <div class="section-title product-section-title"><div><p class="eyebrow blue">HANDPICKED FOR YOU</p><h2 id="productHeading">Featured Products</h2></div><label class="sort-control">Sort by <select id="sortSelect" onchange="renderProducts()"><option value="recommended">Recommended</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select></label></div>
+        <div id="productGrid" class="product-grid"></div>
+      </section>
+
+      <section class="benefits">
+        <div><span>🚚</span><div><b>Convenient Shopping</b><p>Browse products with ease</p></div></div>
+        <div><span>🔒</span><div><b>Demo Checkout</b><p>No real payment processed</p></div></div>
+        <div><span>↩️</span><div><b>Order History</b><p>View your demo orders</p></div></div>
+        <div><span>📞</span><div><b>Customer Support</b><p><a href="tel:7239068281">7239068281</a></p></div></div>
+      </section>
+    </main>
+    <footer><div class="footer-brand"><a href="#" class="brand" onclick="setCategory('All');return false;">🛒 ShopEase</a><p>Shop Smart, Live Better.</p></div><div><h3>Customer Service</h3><p><button class="footer-link" onclick="showSupport()">Help Centre</button></p><p>Returns & Refunds (demo)</p><p>Support: <a href="tel:7239068281">7239068281</a></p></div><div><h3>About ShopEase</h3><p>Student E-Commerce Project</p><p>Built with HTML, CSS and JavaScript.</p></div><p class="copyright">© 2026 ShopEase · Educational demo only</p></footer>
+  </div>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><button class="modal-close" type="button" onclick="closeModal()" aria-label="Close">✕</button><div id="modalContent"></div></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
